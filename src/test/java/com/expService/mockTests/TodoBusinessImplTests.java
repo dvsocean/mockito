@@ -3,6 +3,7 @@ package com.expService.mockTests;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.expService.garage.Garage;
@@ -31,7 +32,28 @@ public class TodoBusinessImplTests {
     //Then - results
     assertEquals(0, filtered.size());
   }
-  
+
+  @Test
+  public void verifyMethodHasBeenCalled() {
+    //Given
+    Garage mockGarage = mock(Garage.class);
+
+    //When
+    mockGarage.getMyCar();
+
+    //Then
+    /*
+    * To verify that a method was never called we use never()
+    * verify(mockGarage, never()).getMyCar();
+    *
+    * To verify that a method was called x times use times(int)
+    * verify(mockGarage, times(2)).getMyCar();
+    *
+    * other mockito methods are present too like atLeast(int) or atLeastOnce()
+    * */
+    verify(mockGarage).getMyCar();
+  }
+
   @Test
   public void testingTheStringMethod() {
     //Given
