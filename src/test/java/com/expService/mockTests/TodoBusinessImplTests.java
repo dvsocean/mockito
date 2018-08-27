@@ -5,6 +5,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.expService.garage.Garage;
 import com.expService.implementations.TodoBusinessImpl;
 import com.expService.services.TodoService;
 import java.util.ArrayList;
@@ -30,8 +31,7 @@ public class TodoBusinessImplTests {
     //Then - results
     assertEquals(0, filtered.size());
   }
-
-
+  
   @Test
   public void testingTheStringMethod() {
     //Given
@@ -45,6 +45,17 @@ public class TodoBusinessImplTests {
     assertEquals(testString, tds.findString());
   }
 
+  @Test
+  public void testTrueClassFullyMocked() {
+    //Given
+    Garage garage = mock(Garage.class);
+
+    //When
+    given(garage.getMyCar()).willReturn("Honda");
+
+    //Then
+    assertEquals("Honda", garage.getMyCar());
+  }
 
   @Test(expected = RuntimeException.class)
   public void testingTheList() {
